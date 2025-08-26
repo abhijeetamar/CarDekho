@@ -7,28 +7,19 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.authentication import BasicAuthentication,SessionAuthentication
+from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser
 
-# Create your views here.
-
-# def car_list_view(request):
-#     cars=Carlist.objects.all()
-#     data={
-#         'cars':list(cars.values())
-#     }
-#     #return JsonResponse(data)
-#     data_json=json.dump(data)
-#     return HttpResponse( data_json)
-
-# def car_detail_view(request,pk):
-#     car=Carlist.objects.get(pk=pk)
-#     data={
-#         'name':car.name,
-#         'description':car.description,
-#         'active':car.active
-#     }
-#     return JsonResponse(data)
 
 class Showroom_view(APIView):
+    # authentication_classes = [BasicAuthentication]
+    #permission_classes = [IsAuthenticated]
+    #permission_classes=[AllowAny]
+    #permission_classes=[IsAdminUser]
+    authentication_classes=[SessionAuthentication]
+    permission_classes = [IsAuthenticated]
+    
+
     def get(self,request):
         showroom = Showroomlist.objects.all()
         serializer = ShowroomSerializer(showroom,many=True,context={'request':request})

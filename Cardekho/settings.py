@@ -123,3 +123,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# settings.py
+
+REST_FRAMEWORK = {
+    # Default Authentication
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',  # for login via session (browsable API)
+        #'rest_framework.authentication.BasicAuthentication',    # basic auth
+        # 'rest_framework_simplejwt.authentication.JWTAuthentication',  # if JWT use karna ho
+    ],
+
+    # Default Permission
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
